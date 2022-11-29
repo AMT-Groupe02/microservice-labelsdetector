@@ -1,6 +1,6 @@
-package com.groupe2.microserverdataobject.dataobject.aws;
+package com.groupe2.microservicelabelsdetector.dataobject.aws;
 
-import com.groupe2.microserverdataobject.dataobject.ICloudClient;
+import com.groupe2.microservicelabelsdetector.dataobject.ICloudClient;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.regions.Region;

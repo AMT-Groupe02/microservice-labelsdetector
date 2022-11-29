@@ -1,13 +1,12 @@
-package com.groupe2.microserverdataobject.dataobject.aws;
+package com.groupe2.microservicelabelsdetector.dataobject.aws;
 
-import ch.amt.dataobject.ILabelDetector;
-import ch.amt.dataobject.LabelObj;
-import ch.amt.dataobject.URLRequestErrorException;
+import com.groupe2.microservicelabelsdetector.dataobject.ILabelDetector;
+import com.groupe2.microservicelabelsdetector.dataobject.LabelObj;
+import com.groupe2.microservicelabelsdetector.dataobject.URLRequestErrorException;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.rekognition.RekognitionClient;
 import software.amazon.awssdk.services.rekognition.model.*;
 
-import javax.imageio.ImageIO;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

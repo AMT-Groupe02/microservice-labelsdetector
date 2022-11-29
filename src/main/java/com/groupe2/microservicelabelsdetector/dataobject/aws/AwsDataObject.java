@@ -1,7 +1,7 @@
-package com.groupe2.microserverdataobject.dataobject.aws;
+package com.groupe2.microservicelabelsdetector.dataobject.aws;
 
-import ch.amt.dataobject.DataObjectNotFoundException;
-import ch.amt.dataobject.IDataObject;
+import com.groupe2.microservicelabelsdetector.dataobject.DataObjectNotFoundException;
+import com.groupe2.microservicelabelsdetector.dataobject.IDataObject;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.services.s3.S3Client;

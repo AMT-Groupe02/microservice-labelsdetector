@@ -1,4 +1,4 @@
-package com.groupe2.microserverdataobject.dataobject;
+package com.groupe2.microservicelabelsdetector.dataobject;
 
 public class URLRequestErrorException extends RuntimeException {
     public URLRequestErrorException() {

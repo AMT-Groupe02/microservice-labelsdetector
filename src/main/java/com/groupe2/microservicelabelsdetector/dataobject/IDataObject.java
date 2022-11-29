@@ -1,4 +1,4 @@
-package com.groupe2.microserverdataobject.dataobject;
+package com.groupe2.microservicelabelsdetector.dataobject;
 
 public interface IDataObject {
     String getUrl();
