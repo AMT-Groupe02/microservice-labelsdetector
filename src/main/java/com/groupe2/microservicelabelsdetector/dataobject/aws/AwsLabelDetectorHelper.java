@@ -1,8 +1,8 @@
 package com.groupe2.microservicelabelsdetector.dataobject.aws;
 
-import com.groupe2.microservicelabelsdetector.dataobject.ILabelDetector;
-import com.groupe2.microservicelabelsdetector.dataobject.LabelObj;
-import com.groupe2.microservicelabelsdetector.dataobject.URLRequestErrorException;
+import com.groupe2.microserverdataobject.dataobject.ILabelDetector;
+import com.groupe2.microserverdataobject.dataobject.LabelObj;
+import com.groupe2.microserverdataobject.dataobject.URLRequestErrorException;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.rekognition.RekognitionClient;
 import software.amazon.awssdk.services.rekognition.model.*;

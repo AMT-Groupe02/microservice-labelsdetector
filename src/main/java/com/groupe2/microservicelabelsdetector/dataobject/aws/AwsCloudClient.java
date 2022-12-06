@@ -1,8 +1,10 @@
 package com.groupe2.microservicelabelsdetector.dataobject.aws;
 
-import com.groupe2.microservicelabelsdetector.dataobject.ICloudClient;
+import com.groupe2.microserverdataobject.dataobject.ICloudClient;
+import io.github.cdimascio.dotenv.Dotenv;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.rekognition.RekognitionClient;
 
@@ -24,7 +26,8 @@ public final class AwsCloudClient implements ICloudClient {
     private Region region;
 
     private AwsCloudClient() {
-        credentialsProvider = EnvironmentVariableCredentialsProvider.create();
+        Dotenv dotenv = Dotenv.load();
+        credentialsProvider = StaticCredentialsProvider.create(AwsBasicCredentials.create(dotenv.get("ACCESS_KEY"), dotenv.get("SECRET_KEY")));
         region = Region.EU_WEST_2;
     }
 
