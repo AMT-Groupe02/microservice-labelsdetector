@@ -1,6 +1,6 @@
 package com.groupe2.microservicelabelsdetector.dataobject.aws;
 
-import com.groupe2.microserverdataobject.dataobject.ICloudClient;
+import com.groupe2.microservicelabelsdetector.dataobject.ICloudClient;
 import io.github.cdimascio.dotenv.Dotenv;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
