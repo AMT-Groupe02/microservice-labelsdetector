@@ -31,6 +31,11 @@ public class LabelObj {
         return parents;
     }
 
+    @Override
+    public String toString() {
+        return getName() + " " + getConfidence();
+    }
+
     public static class InstanceObj {
         private final double confidence;
         private final BoundingBoxObj boundingBox;
