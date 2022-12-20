@@ -69,30 +69,6 @@ public class AwsLabelDetectorHelper implements ILabelDetector {
         }
     }
 
-
-    public List<LabelObj> getLabelsFromImage(String bucketName, String imageKey, int maxLabels, float minConfidence) {
-
-        if (maxLabels < 0 || minConfidence < 0 || minConfidence > 100) {
-            throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0");
-        }
-
-        try(RekognitionClient rekClient = RekognitionClient.builder().credentialsProvider(awsClient.getCredentialsProvider()).region(awsClient.getRegion()).build()) {
-
-            DetectLabelsRequest detectLabelsRequest = DetectLabelsRequest.builder().image(
-                    Image.builder().s3Object(
-                            S3Object.builder().name(imageKey).bucket(bucketName).build()).build())
-                    .maxLabels(maxLabels)
-                    .minConfidence(minConfidence)
-                    .build();
-
-            DetectLabelsResponse labelsResponse = rekClient.detectLabels(detectLabelsRequest);
-            List<Label> labels = labelsResponse.labels();
-
-            return awsLabelsToLabelObjs(labels);
-
-        }
-    }
-
     private static List<LabelObj> awsLabelsToLabelObjs(List<Label> labels) {
         List<LabelObj> labelObjs = new LinkedList<>();
         for (Label label : labels) {
