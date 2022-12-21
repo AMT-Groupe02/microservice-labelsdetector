@@ -1,4 +1,4 @@
-name: ci
+name: deploy
 
 on:
   push:
@@ -27,5 +27,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          target: production
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/labelsdetector-microservice:latest
