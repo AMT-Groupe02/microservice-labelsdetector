@@ -16,7 +16,7 @@ RUN chmod +x ./env-script.sh
 RUN ./env-script.sh
 
 FROM base as test
-RUN ./mvnw test
+RUN ["./mvnw", "test"]
 
 FROM base as development
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
