@@ -16,19 +16,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AwsLabelDetectorHelper implements ILabelDetector {
-    private static final AwsCloudClient awsClient = AwsCloudClient.getInstance();
+    private static final AwsCloudClient AWS_CLIENT = AwsCloudClient.getInstance();
 
     private static byte[] downloadFile(String url) throws IOException {
         URL url2 = new URL(url);
-        try (InputStream in = new BufferedInputStream(url2.openStream())) {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (InputStream in = new BufferedInputStream(url2.openStream()); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+
             byte[] buf = new byte[1024];
             int n = 0;
             while (-1 != (n = in.read(buf))) {
                 out.write(buf, 0, n);
             }
-            out.close();
-            in.close();
+
             return out.toByteArray();
         }
     }
@@ -70,7 +69,7 @@ public class AwsLabelDetectorHelper implements ILabelDetector {
     @Override
     public List<LabelObj> getLabelsFromImage(String url, int maxLabels){
         if (maxLabels < 0) {
-            throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0 and minConfidence must be lower than 100");
+            throw new IllegalArgumentException("maxLabels must be greater to 0");
         }
 
         return getLabelsFromImage(url, DetectLabelsRequest.builder().maxLabels(maxLabels));
@@ -78,7 +77,7 @@ public class AwsLabelDetectorHelper implements ILabelDetector {
     @Override
     public List<LabelObj> getLabelsFromImage(String url, float minConfidence){
         if (minConfidence < 0 || minConfidence > 100) {
-            throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0 and minConfidence must be lower than 100");
+            throw new IllegalArgumentException("minConfidence must be greater or equal to 0 be lower than 100");
         }
 
         return getLabelsFromImage(url, DetectLabelsRequest.builder().minConfidence(minConfidence));
@@ -93,7 +92,7 @@ public class AwsLabelDetectorHelper implements ILabelDetector {
         try {
             byte[] image = downloadFile(url);
 
-            try (RekognitionClient rekClient = RekognitionClient.builder().credentialsProvider(awsClient.getCredentialsProvider()).region(awsClient.getRegion()).build()) {
+            try (RekognitionClient rekClient = RekognitionClient.builder().credentialsProvider(AWS_CLIENT.getCredentialsProvider()).region(AWS_CLIENT.getRegion()).build()) {
 
                 SdkBytes sourceBytes = SdkBytes.fromByteArray(image);
 
