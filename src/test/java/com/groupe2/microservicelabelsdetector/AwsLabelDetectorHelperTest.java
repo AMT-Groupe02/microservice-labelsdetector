@@ -24,25 +24,31 @@ public class AwsLabelDetectorHelperTest {
 
     @Test
     void getLabelsFromImage_wrongMaxLabel_Error() {
+        //given
         final int MAX_LABELS = -2;
         final float MIN_CONFIDENCE = 80;
-
+        //when
+        //then
         assertThrows(IllegalArgumentException.class, () -> labelDetectorHelper.getLabelsFromImage(URL, MAX_LABELS, MIN_CONFIDENCE));
     }
 
     @Test
     void getLabelsFromImage_wrongMinConfidenceGreater_Error() {
+        //given
         final int MAX_LABELS = 4;
         final float MIN_CONFIDENCE = 101;
-
+        //when
+        //then
         assertThrows(IllegalArgumentException.class, () -> labelDetectorHelper.getLabelsFromImage(URL, MAX_LABELS, MIN_CONFIDENCE));
     }
 
     @Test
     void getLabelsFromImage_wrongMinConfidenceSmaller_Error() {
+        //given
         final int MAX_LABELS = 4;
         final float MIN_CONFIDENCE = -1;
-
+        //when
+        //then
         assertThrows(IllegalArgumentException.class, () -> labelDetectorHelper.getLabelsFromImage(URL, MAX_LABELS, MIN_CONFIDENCE));
     }
 

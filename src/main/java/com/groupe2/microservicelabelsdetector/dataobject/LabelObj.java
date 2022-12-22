@@ -24,7 +24,7 @@ public class LabelObj {
     }
 
     public List<InstanceObj> getInstances() {
-        return instances; //TODO faire une copie?
+        return instances;
     }
 
     public List<String> getParents() {
