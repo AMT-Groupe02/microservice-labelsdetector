@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AwsLabelDetectorHelperTest {
     // it should be a link that never expires, but we don't have enough time, so it will be a random image that we found on Google.
+    // TODO change this link
     static private final String URL = "https://images.unsplash.com/photo-1546636889-ba9fdd63583e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80";
     static private ILabelDetector labelDetectorHelper;
 
