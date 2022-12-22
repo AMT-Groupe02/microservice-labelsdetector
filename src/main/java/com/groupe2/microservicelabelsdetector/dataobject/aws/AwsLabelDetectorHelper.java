@@ -18,54 +18,18 @@ import java.util.List;
 public class AwsLabelDetectorHelper implements ILabelDetector {
     private static final AwsCloudClient awsClient = AwsCloudClient.getInstance();
 
-    static byte[] downloadFile(String url) throws IOException {
+    private static byte[] downloadFile(String url) throws IOException {
         URL url2 = new URL(url);
-        try(InputStream in = new BufferedInputStream(url2.openStream())){
+        try (InputStream in = new BufferedInputStream(url2.openStream())) {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             byte[] buf = new byte[1024];
             int n = 0;
-            while (-1!=(n=in.read(buf)))
-            {
+            while (-1 != (n = in.read(buf))) {
                 out.write(buf, 0, n);
             }
             out.close();
             in.close();
             return out.toByteArray();
-        }
-    }
-
-    @Override
-    public List<LabelObj> getLabelsFromImage(String url, int maxLabels, float minConfidence) {
-        try{
-            byte[] image = downloadFile(url);
-
-
-            if (maxLabels < 0 || minConfidence < 0 || minConfidence > 100) {
-                throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0");
-            }
-
-            try(RekognitionClient rekClient = RekognitionClient.builder().credentialsProvider(awsClient.getCredentialsProvider()).region(awsClient.getRegion()).build()) {
-
-                SdkBytes sourceBytes = SdkBytes.fromByteArray(image);
-
-                Image souImage = Image.builder()
-                        .bytes(sourceBytes)
-                        .build();
-
-                DetectLabelsRequest detectLabelsRequest = DetectLabelsRequest.builder()
-                        .image(souImage)
-                        .maxLabels(maxLabels)
-                        .minConfidence(minConfidence)
-                        .build();
-
-                DetectLabelsResponse labelsResponse = rekClient.detectLabels(detectLabelsRequest);
-                List<Label> labels = labelsResponse.labels();
-
-                return awsLabelsToLabelObjs(labels);
-            }
-
-        }catch (IOException e){
-            throw new URLRequestErrorException();
         }
     }
 
@@ -81,12 +45,7 @@ public class AwsLabelDetectorHelper implements ILabelDetector {
         List<LabelObj.InstanceObj> instances = new LinkedList<>();
         if (label.instances() != null) {
             for (Instance instance : label.instances()) {
-                instances.add(new LabelObj.InstanceObj(instance.confidence(), instance.boundingBox() != null ?
-                        new LabelObj.InstanceObj.BoundingBoxObj(
-                                instance.boundingBox().height(),
-                                instance.boundingBox().left(),
-                                instance.boundingBox().top(),
-                                instance.boundingBox().width()) : null));
+                instances.add(new LabelObj.InstanceObj(instance.confidence(), instance.boundingBox() != null ? new LabelObj.InstanceObj.BoundingBoxObj(instance.boundingBox().height(), instance.boundingBox().left(), instance.boundingBox().top(), instance.boundingBox().width()) : null));
             }
         }
 
@@ -97,5 +56,59 @@ public class AwsLabelDetectorHelper implements ILabelDetector {
             }
         }
         return new LabelObj(label.name(), label.confidence(), instances, parents);
+    }
+
+    @Override
+    public List<LabelObj> getLabelsFromImage(String url, int maxLabels, float minConfidence) {
+        if (maxLabels < 0 || minConfidence < 0 || minConfidence > 100) {
+            throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0 and minConfidence must be lower than 100");
+        }
+
+        return getLabelsFromImage(url, DetectLabelsRequest.builder().maxLabels(maxLabels).minConfidence(minConfidence));
+    }
+
+    @Override
+    public List<LabelObj> getLabelsFromImage(String url, int maxLabels){
+        if (maxLabels < 0) {
+            throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0 and minConfidence must be lower than 100");
+        }
+
+        return getLabelsFromImage(url, DetectLabelsRequest.builder().maxLabels(maxLabels));
+    }
+    @Override
+    public List<LabelObj> getLabelsFromImage(String url, float minConfidence){
+        if (minConfidence < 0 || minConfidence > 100) {
+            throw new IllegalArgumentException("maxLabels and minConfidence must be greater or equal to 0 and minConfidence must be lower than 100");
+        }
+
+        return getLabelsFromImage(url, DetectLabelsRequest.builder().minConfidence(minConfidence));
+    }
+
+    @Override
+    public List<LabelObj> getLabelsFromImage(String url) {
+        return getLabelsFromImage(url, DetectLabelsRequest.builder());
+    }
+
+    private List<LabelObj> getLabelsFromImage(String url, DetectLabelsRequest.Builder builder) {
+        try {
+            byte[] image = downloadFile(url);
+
+            try (RekognitionClient rekClient = RekognitionClient.builder().credentialsProvider(awsClient.getCredentialsProvider()).region(awsClient.getRegion()).build()) {
+
+                SdkBytes sourceBytes = SdkBytes.fromByteArray(image);
+
+                Image souImage = Image.builder().bytes(sourceBytes).build();
+
+                DetectLabelsRequest detectLabelsRequest = builder.image(souImage).build();
+
+                DetectLabelsResponse labelsResponse = rekClient.detectLabels(detectLabelsRequest);
+                List<Label> labels = labelsResponse.labels();
+
+                return awsLabelsToLabelObjs(labels);
+            }
+
+        } catch (IOException e) {
+            throw new URLRequestErrorException();
+        }
     }
 }
