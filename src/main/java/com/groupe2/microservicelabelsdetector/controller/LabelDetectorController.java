@@ -20,7 +20,17 @@ public class LabelDetectorController {
         AwsLabelDetectorHelper awsLabelDetectorHelper = new AwsLabelDetectorHelper();
 
         System.out.println("URL : " + image.getUrl() + " maxLabels : " + image.getMaxLabels() + " minConfidence : " + image.getMinConfidence());
-        List<LabelObj> labels = awsLabelDetectorHelper.getLabelsFromImage(image.getUrl(), image.getMaxLabels(), image.getMinConfidence());
+        List<LabelObj> labels ;
+
+        if (image.getMaxLabels() != null && image.getMinConfidence() != null){
+            labels = awsLabelDetectorHelper.getLabelsFromImage(image.getUrl(), image.getMaxLabels(), image.getMinConfidence());
+        }else if(image.getMaxLabels() != null ){
+            labels = awsLabelDetectorHelper.getLabelsFromImage(image.getUrl(), image.getMaxLabels());
+        }else if (image.getMinConfidence() != null){
+            labels = awsLabelDetectorHelper.getLabelsFromImage(image.getUrl(), image.getMinConfidence());
+        }else{
+            labels = awsLabelDetectorHelper.getLabelsFromImage(image.getUrl());
+        }
 
         List<Label> nlabels = labels.stream().map(label -> new Label(label.getName(), label.getConfidence())).toList();
 
