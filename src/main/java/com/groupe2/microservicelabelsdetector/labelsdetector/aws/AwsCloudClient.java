@@ -1,4 +1,4 @@
-package com.groupe2.microservicelabelsdetector.dataobject.aws;
+package com.groupe2.microservicelabelsdetector.labelsdetector.aws;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;

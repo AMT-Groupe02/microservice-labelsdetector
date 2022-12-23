@@ -1,8 +1,8 @@
 package com.groupe2.microservicelabelsdetector;
 
-import com.groupe2.microservicelabelsdetector.dataobject.ILabelDetector;
-import com.groupe2.microservicelabelsdetector.dataobject.LabelObj;
-import com.groupe2.microservicelabelsdetector.dataobject.aws.AwsLabelDetectorHelper;
+import com.groupe2.microservicelabelsdetector.labelsdetector.ILabelDetector;
+import com.groupe2.microservicelabelsdetector.labelsdetector.LabelObj;
+import com.groupe2.microservicelabelsdetector.labelsdetector.aws.AwsLabelDetectorHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
