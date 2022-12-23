@@ -1,7 +1,7 @@
 package com.groupe2.microservicelabelsdetector.controller;
 
-import com.groupe2.microservicelabelsdetector.dataobject.LabelObj;
-import com.groupe2.microservicelabelsdetector.dataobject.aws.AwsLabelDetectorHelper;
+import com.groupe2.microservicelabelsdetector.labelsdetector.LabelObj;
+import com.groupe2.microservicelabelsdetector.labelsdetector.aws.AwsLabelDetectorHelper;
 import com.groupe2.microservicelabelsdetector.domain.requestbody.UrlToImage;
 import com.groupe2.microservicelabelsdetector.domain.responsebody.Label;
 import com.groupe2.microservicelabelsdetector.domain.responsebody.LabelsResponse;

@@ -74,7 +74,7 @@ L'image construite ne contient pas le fichier .env, il est donc important de ne 
 │ ├── java.com.groupe2
 │ │   └── microservicelabelsdetector
 │ │       ├── controller --> contient les controllers
-│ │       ├── dataobject --> contient la classe qui permet de gérer la detection de labels.
+│ │       ├── labelsdetector --> contient la classe qui permet de gérer la detection de labels.
 │ │       │ └── aws --> L'implémentation du code pour aws.
 │ │       └── domain
 │ │           ├── requestbody --> Classe représentant les requêtes http

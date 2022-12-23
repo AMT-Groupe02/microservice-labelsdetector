@@ -1,4 +1,4 @@
-package com.groupe2.microservicelabelsdetector.dataobject;
+package com.groupe2.microservicelabelsdetector.labelsdetector;
 
 import java.util.List;
 

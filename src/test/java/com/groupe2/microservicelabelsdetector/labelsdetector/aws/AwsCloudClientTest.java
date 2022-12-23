@@ -1,4 +1,4 @@
-package com.groupe2.microservicelabelsdetector.dataobject.aws;
+package com.groupe2.microservicelabelsdetector.labelsdetector.aws;
 
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.regions.Region;
