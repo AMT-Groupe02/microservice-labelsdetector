@@ -2,23 +2,23 @@ package com.groupe2.microservicelabelsdetector.domain.requestbody;
 
 public class UrlToImage {
     private String url;
-    private int maxLabels;
-    private float minConfidence;
+    private Integer maxLabels;
+    private Float minConfidence;
 
     public UrlToImage() {
     }
 
-    public UrlToImage( String url, int maxLabels, float minConfidence) {
+    public UrlToImage( String url, Integer maxLabels, Float minConfidence) {
         this.url = url;
         this.maxLabels = maxLabels;
         this.minConfidence = minConfidence;
     }
 
-    public int getMaxLabels() {
+    public Integer getMaxLabels() {
         return maxLabels;
     }
 
-    public float getMinConfidence() {
+    public Float getMinConfidence() {
         return minConfidence;
     }
 
