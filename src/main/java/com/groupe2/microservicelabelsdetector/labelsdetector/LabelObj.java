@@ -1,4 +1,4 @@
-package com.groupe2.microservicelabelsdetector.dataobject;
+package com.groupe2.microservicelabelsdetector.labelsdetector;
 
 import java.util.List;
 
@@ -24,11 +24,16 @@ public class LabelObj {
     }
 
     public List<InstanceObj> getInstances() {
-        return instances; //TODO faire une copie?
+        return instances;
     }
 
     public List<String> getParents() {
         return parents;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getConfidence();
     }
 
     public static class InstanceObj {
