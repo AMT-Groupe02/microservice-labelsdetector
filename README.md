@@ -42,7 +42,7 @@ Pour lancer les tests, il faut faire la commande suivante :
 
 ### Tests
 ```bash
-docker build --build-arg ACCESS_KEY_ARG=YOUR_KEY --build-arg SECRET_KEY_ARG=YOUR_KEY -t dataobject-test:latest --target test .
+docker build --build-arg ACCESS_KEY_ARG=YOUR_KEY --build-arg SECRET_KEY_ARG=YOUR_KEY -t labelsdetector-test:latest --target test .
 ```
 Les tests sont lancés durant l'étape de build, ce qui signifie que le build échoue si les tests échouent.
 
@@ -50,8 +50,8 @@ Les tests sont lancés durant l'étape de build, ce qui signifie que le build é
 
 ### development
 ```bash
-docker build -t dataobject-development:latest --target development .
-docker run -p 8080:8080 dataobject-development:latest
+docker build -t labelsdetector-development:latest --target development .
+docker run -p 8080:8080 labelsdetector-development:latest
 ```
 
 Lors du build de cette image le fichier .env se trouvant à la racine du projet est copié,
@@ -61,8 +61,8 @@ veillez donc à ce qu'il soit existant et complet.
 
 ### Production
 ```bash
-docker build -t dataobject-production:latest --target production .
-docker run -p 8080:8080 dataobject-production:latest
+docker build -t labelsdetector-production:latest --target production .
+docker run -p 8080:8080 labelsdetector-production:latest
 ```
 
 L'image construite ne contient pas le fichier .env, il est donc important de ne pas oublier de le rajouter à la racine de l'image.
